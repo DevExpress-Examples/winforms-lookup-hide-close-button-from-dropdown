@@ -3,18 +3,35 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E292)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
+
+# WinForms Lookup - Hide the Close button from the dropdown
+
+This example creates a custom lookup control that does not display the Close button in the dropdown (the `fCloseButtonStyle` field is set to `BlobCloseButtonStyle.None`). The example overrides the `LookUpEdit.CreatePopupForm` method to return a custom edit form:
+
+```csharp
+public class UserLookUpEdit : LookUpEdit {
+  // ...
+  protected override DevExpress.XtraEditors.Popup.PopupBaseForm CreatePopupForm() {
+      return new UserPopupLookUpEditForm(this);
+  }
+}
+
+public class UserPopupLookUpEditForm : PopupLookUpEditForm {
+
+    public UserPopupLookUpEditForm(LookUpEdit owner)
+        : base(owner) {
+        fCloseButtonStyle = BlobCloseButtonStyle.None;
+    }
+}
+```
+
+
+## Files to Review
 
 * [Form1.cs](./CS/WindowsApplication1/Form1.cs) (VB: [Form1.vb](./VB/WindowsApplication1/Form1.vb))
 * [MyLookUpEdit.cs](./CS/WindowsApplication1/MyLookUpEdit.cs) (VB: [MyLookUpEdit.vb](./VB/WindowsApplication1/MyLookUpEdit.vb))
-* [Program.cs](./CS/WindowsApplication1/Program.cs) (VB: [Program.vb](./VB/WindowsApplication1/Program.vb))
-<!-- default file list end -->
-# How to delete the close button from the LookUpEdit popup window
 
 
-<p>This task can be easily accomplished by creating a LookUpEdit descendant. Inherit from the PopupLookUpEditForm class, and set the fCloseButtonStyle property to BlobCloseButtonStyle.None. To embed your new class in the LookUpEdit descendant, override the LookUpEdit.CreatePopupForm method and return your own form.</p>
+## Documentation
 
-<br/>
-
-
+* [Custom Editors](https://docs.devexpress.com/WindowsForms/4716/controls-and-libraries/editors-and-simple-controls/common-editor-features-and-concepts/custom-editors)
